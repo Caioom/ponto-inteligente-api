@@ -8,7 +8,7 @@ public class PasswordUtils {
 	
 	private static final Logger log = LoggerFactory.getLogger(PasswordUtils.class);
 	
-	public String gerarBCrypt(String senha) {
+	public static String gerarBCrypt(String senha) {
 		
 		if(senha == null) {
 			return senha;
