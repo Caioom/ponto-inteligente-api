@@ -76,12 +76,16 @@ public class Funcionario implements Serializable {
 	public String getSenha() {
 		return senha;
 	}
+	
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	@Column(name = "cpf")
 	public String getCpf() {
 		return cpf;
 	}
+	
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
@@ -93,7 +97,7 @@ public class Funcionario implements Serializable {
 	
 	@Transient //Esta annotation serve para indicar para o spring que este método não deve ser lido como parte da entidade e ser mapeado pela JPA
 	public Optional<BigDecimal> getValorHoraOpt() {
-		return Optional.ofNullable(this.valorHora);
+		return Optional.ofNullable(this.getValorHora());
 	}
 	
 	public void setValorHora(BigDecimal valorHora) {
@@ -107,7 +111,7 @@ public class Funcionario implements Serializable {
 	
 	@Transient //Esta annotation serve para indicar para o spring que este método não deve ser lido como parte da entidade e ser mapeado pela JPA
 	public Optional<Float> getQtdHorasTrabalhoDiaOpt() {
-		return Optional.ofNullable(this.qtdHorasTrabalhoDia);
+		return Optional.ofNullable(this.getQtdHorasTrabalhoDia());
 	}
 	
 	public void setQtdHorasTrabalhoDia(Float qtdHorasTrabalhoDia) {
@@ -117,6 +121,11 @@ public class Funcionario implements Serializable {
 	@Column(name="qtd_horas_almoco", nullable=false)
 	public Float getQtdHorasAlmoco() {
 		return qtdHorasAlmoco;
+	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasAlmocoOpt() {
+		return Optional.ofNullable(this.getQtdHorasAlmoco());
 	}
 	
 	public void setQtdHorasAlmoco(Float qtdHorasAlmoco) {
