@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -41,6 +42,7 @@ public class EmpresaControllerTest {
 	private static final String RAZAO_SOCIAL = "Caio it";
 	
 	@Test
+	@WithMockUser
 	public void testBuscarPorCnpjErrado() throws Exception {
 		BDDMockito.given(empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
 		
@@ -49,6 +51,8 @@ public class EmpresaControllerTest {
 			.andExpect(jsonPath("$.errors").value("Não foi possível encontrar o cnpj " + CNPJ));
 	}
 	
+	@Test
+	@WithMockUser
 	public void testBuscarEmpresa() throws Exception {
 		BDDMockito.given(empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.of(this.obterEmpresa()));
 		
